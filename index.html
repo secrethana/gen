@@ -447,204 +447,134 @@
 <div id="result"></div>
 
 <script>
-  // 정답키: 객관식 -> "1"~"5", 단답형 -> 문자열 또는 배열(다중 정답)
   const answerKey = [
-    "3", // Q1
-    "4", // Q2
-    "1", // Q3
-    "4", // Q4
-    "2", // Q5
-    "3", // Q6
-    "3", // Q7
-    "2", // Q8
-    "1", // Q9
-    "5", // Q10
-    "星野源", // Q11
-    "아라가키유이", // Q12
-    ["ann","올나이트니뽄","올나잇니뽄"], // Q13 다중 정답
-    { base:"@iamgenhoshino", allowNoAt:true }, // Q14 골뱅이 없어도 인정
-    ["옐로우매거진","옐로매거진"], // Q15 다중 정답
-    { contains:"칫솔" }, // Q16 '칫솔' 포함 시 정답
-    ["쏘시타라","sositara","そしたら"], // Q17 다중 정답
-    "생명의차창에서", // Q18
-    [ ["자이언티","쟈이언티","ziont","zion.t"], ["nomad","노매드","노마드","노메드"] ], // Q19
-    ["아뮤즈","어뮤즈","amuse"], // Q20 다중 정답
-    "2", // Q21
-    "4", // Q22
-    "2", // Q23
-    "4", // Q24
-    "3", // Q25
-    "5", // Q26
-    "4", // Q27
-    "1", // Q28
-    "3", // Q29
-    "3"  // Q30
+    "3", "4", "1", "4", "2", "3", "3", "2", "1", "5",
+    "星野源", "아라가키유이", ["ann", "올나이트니뽄", "올나잇니뽄"],
+    { base: "@iamgenhoshino", allowNoAt: true },
+    ["옐로우매거진", "옐로매거진"],
+    { contains: "칫솔" },
+    ["소시타라", "쏘시타라", "sositara", "そしたら"],
+    "생명의차창에서",
+    [["자이언티", "쟈이언티", "ziont", "zion.t"], ["nomad", "노매드", "노마드", "노메드"]],
+    ["아뮤즈", "어뮤즈", "amuse"],
+    "2", "4", "2", "4", "3", "5", "4", "1", "3", "3"
   ];
 
   const points = [
-    3,3,3,5,3,3,5,3,3,5,
-    3,3,3,3,3,3,5,3,3,3,
-    3,3,3,3,3,5,3,3,3,3
+    3, 3, 3, 5, 3, 3, 5, 3, 3, 5,
+    3, 3, 3, 3, 3, 3, 5, 3, 3, 3,
+    3, 3, 3, 3, 3, 5, 3, 3, 3, 3
   ];
 
   function normalize(s) {
-    return (s || "")
-      .toString()
-      .replace(/\s/g, "") // 띄어쓰기 제거
-      .toLowerCase();
+    return (s || "").toString().replace(/\s/g, "").toLowerCase();
   }
 
-function gradeQuiz() {
-  const nickname = document.getElementById("nickname").value.trim();
-  if (!nickname) {
-    alert("닉네임을 입력해주세요.");
-    return;
-  }
-
-  // 미응답 검사
-
-  const unanswered = [];
-  for (let i = 0; i < answerKey.length; i++) {
-    const qNum = i + 1;
-    const radios = document.querySelectorAll(`input[name="q${qNum}"][type="radio"]`);
-    let answered = false;
-
-    if (radios.length) {
-      // 객관식
-      answered = !!document.querySelector(`input[name="q${qNum}"]:checked`);
-    } else {
-      // 단답형/서술형
-      const field = document.querySelector(`[name="q${qNum}"]`);
-      answered = field && field.value.trim() !== "";
-    }
-if (qNum === 19) {
-  const artistField = document.querySelector('[name="q19_artist"]');
-  const songField = document.querySelector('[name="q19_song"]');
-  answered = artistField.value.trim() !== "" && songField.value.trim() !== "";
-} else {
-  const field = document.querySelector(`[name="q${qNum}"]`);
-  answered = field && field.value.trim() !== "";
-}
-
-    if (!answered) {
-      unanswered.push(qNum);
-    }
-  }
-
-  if (unanswered.length > 0) {
-    alert(`안 푼 문제가 있습니다. 모든 문제를 풀고 제출해주세요.\n(미응답: ${unanswered.join(", ")}번)`);
-    return; // 채점 중단
-  }
-
-  // ===== 여기서부터 기존 채점 로직 =====
-  let totalAvailable = 0;
-  let earned = 0;
-  const answers = [];
-for (let i = 0; i < answerKey.length; i++) {
-  const qNum = i + 1;
-  const key = answerKey[i];
-  const pt = Number(points[i] || 0);
-
-  let correct = false;
-  let userVal = "";
-
-  if (qNum === 19) {
-    // Q19: 가수 + 곡명 두 칸 채점
-    const artistVal = document.querySelector('[name="q19_artist"]').value;
-    const songVal = document.querySelector('[name="q19_song"]').value;
-
-    const artistOk = key[0].some(ans => normalize(artistVal) === normalize(ans));
-    const songOk = key[1].some(ans => normalize(songVal) === normalize(ans));
-
-    correct = artistOk && songOk;
-    userVal = `${artistVal} / ${songVal}`;
-  } else {
-    // 기존 객관식/단답형 채점 로직
-    const checked = document.querySelector(`input[name="q${qNum}"]:checked`);
-    if (checked) {
-      userVal = checked.value;
-    } else {
-      const field = document.querySelector(`[name="q${qNum}"]`);
-      userVal = field ? field.value : "";
+  function gradeQuiz() {
+    const nickname = document.getElementById("nickname").value.trim();
+    if (!nickname) {
+      alert("닉네임을 입력해주세요.");
+      return;
     }
 
-    if (/^[1-5]$/.test(key)) {
-      correct = userVal === key;
-    } else if (Array.isArray(key)) {
-      correct = key.some(ans => normalize(userVal) === normalize(ans));
-    } else if (typeof key === "object" && key.base) {
-      const baseNorm = normalize(key.base.replace(/^@/, ""));
-      const userNorm = normalize(userVal.replace(/^@/, ""));
-      correct = userNorm === baseNorm;
-    } else if (typeof key === "object" && key.contains) {
-      correct = normalize(userVal).includes(normalize(key.contains));
-    } else {
-      correct = normalize(userVal) === normalize(key);
+    const unanswered = [];
+    for (let i = 0; i < answerKey.length; i++) {
+      const qNum = i + 1;
+      let answered = false;
+
+      if (qNum === 19) {
+        const artistField = document.querySelector('[name="q19_artist"]');
+        const songField = document.querySelector('[name="q19_song"]');
+        answered = artistField?.value.trim() !== "" && songField?.value.trim() !== "";
+      } else {
+        const radios = document.querySelectorAll(`input[name="q${qNum}"][type="radio"]`);
+        if (radios.length) {
+          answered = !!document.querySelector(`input[name="q${qNum}"]:checked`);
+        } else {
+          const field = document.querySelector(`[name="q${qNum}"]`);
+          answered = field?.value.trim() !== "";
+        }
+      }
+
+      if (!answered) unanswered.push(qNum);
     }
-  }
 
-  if (correct) earned += pt;
-  answers.push({ question: qNum, user: userVal, key, correct, pt });
-}
-
-  for (let i = 0; i < answerKey.length; i++) {
-    const qNum = i + 1;
-    const key = answerKey[i];
-    const pt = Number(points[i] || 0);
-    totalAvailable += pt;
-
-    let userVal = "";
-    const checked = document.querySelector(`input[name="q${qNum}"]:checked`);
-    if (checked) {
-      userVal = checked.value;
-    } else {
-      const field = document.querySelector(`[name="q${qNum}"]`);
-      userVal = field ? field.value : "";
+    if (unanswered.length > 0) {
+      alert(`안 푼 문제가 있습니다. 모든 문제를 풀고 제출해주세요.\n(미응답: ${unanswered.join(", ")}번)`);
+      return;
     }
+
+    let totalAvailable = 0;
+    let earned = 0;
+    const answers = [];
+
+    for (let i = 0; i < answerKey.length; i++) {
+      const qNum = i + 1;
+      const key = answerKey[i];
+      const pt = Number(points[i] || 0);
+      totalAvailable += pt;
 
       let correct = false;
+      let userVal = "";
 
-      if (/^[1-5]$/.test(key)) {
-        // 객관식
-        correct = userVal === key;
-      } else if (Array.isArray(key)) {
-        // 다중 정답
-        correct = key.some(ans => normalize(userVal) === normalize(ans));
-      } else if (typeof key === "object" && key.base) {
-        // Q14: 골뱅이 없어도 인정
-        const baseNorm = normalize(key.base.replace(/^@/, ""));
-        const userNorm = normalize(userVal.replace(/^@/, ""));
-        correct = userNorm === baseNorm;
-      } else if (typeof key === "object" && key.contains) {
-        // Q16: 특정 단어 포함
-        correct = normalize(userVal).includes(normalize(key.contains));
+      if (qNum === 19) {
+        const artistVal = document.querySelector('[name="q19_artist"]').value;
+        const songVal = document.querySelector('[name="q19_song"]').value;
+        const artistOk = key[0].some(ans => normalize(artistVal) === normalize(ans));
+        const songOk = key[1].some(ans => normalize(songVal) === normalize(ans));
+        correct = artistOk && songOk;
+        userVal = `${artistVal} / ${songVal}`;
       } else {
-        // 일반 단답형
-        correct = normalize(userVal) === normalize(key);
+        const checked = document.querySelector(`input[name="q${qNum}"]:checked`);
+        if (checked) {
+          userVal = checked.value;
+        } else {
+          const field = document.querySelector(`[name="q${qNum}"]`);
+          userVal = field ? field.value : "";
+        }
+
+        if (/^[1-5]$/.test(key)) {
+          correct = userVal === key;
+        } else if (Array.isArray(key)) {
+          correct = key.some(ans => normalize(userVal) === normalize(ans));
+        } else if (typeof key === "object" && key.base) {
+          const baseNorm = normalize(key.base.replace(/^@/, ""));
+          const userNorm = normalize(userVal.replace(/^@/, ""));
+          correct = userNorm === baseNorm;
+        } else if (typeof key === "object" && key.contains) {
+          correct = normalize(userVal).includes(normalize(key.contains));
+        } else {
+          correct = normalize(userVal) === normalize(key);
+        }
       }
 
       if (correct) earned += pt;
-
       answers.push({ question: qNum, user: userVal, key, correct, pt });
     }
 
     const percent = ((earned / totalAvailable) * 100).toFixed(1);
+    let message = "";
 
-// 점수 구간별 메시지
-let message = "";
-if (earned >= 90) {
-  message = "호시노겐만 파는 당신은 호덕호덕! 멋져요!";
-} else if (earned >= 70) {
-  message = "호시노겐을 사랑하는 우리는 겐모다치!";
-} else if (earned >= 50) {
-  message = "괜찮아요, 조금만 더 공부하면 돼요! 우리 겐상 어렵지 않아요";
-} else {
-  message = "겐상을 이제 알아가는 중?";
-}
+    if (earned >= 90) {
+      message = "호시노겐만 파는 당신은 호덕호덕! 멋져요!";
+    } else if (earned >= 70) {
+      message = "호시노겐을 사랑하는 우리는 겐모다치!";
+    } else if (earned >= 50) {
+      message = "괜찮아요, 조금만 더 공부하면 돼요! 우리 겐상 어렵지 않아요";
+    } else {
+      message = "겐상을 이제 알아가는 중?";
+    }
 
-// 팝업창 띄우기
-alert(`${nickname} 님 ${earned}점 입니다.\n${message}`);
+    alert(`${nickname} 님 ${earned}점 입니다.\n${message}`);
 
+fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycby8wqtXYaAjBtZQq6wPYPddHV-3OHmd2IEuR33x4UI9zwtmjfkYgeq9hNjzzgbJ8VTy/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    nickname: nickname, // 사용자가 입력한 닉네임
+    score: earned        // 계산된 점수
+  })
+});
 
     document.getElementById("result").innerHTML = `
       <div class="nick">닉네임: ${nickname}</div>
