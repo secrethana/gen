@@ -131,7 +131,7 @@
 
   <!-- 2 -->
   <div class="question" data-q="2">
-    <div class="q-title" data-num="2."> 호시노겐의 앨범을 발매년도 순서대로 바르게 나열한 것은? [3점]<br/>ばがのうた, GEN, Yellow Dancer, Pop Virus, Stranger</div>
+    <div class="q-title" data-num="2."> 호시노겐의 앨범을 발매년도 순서대로 바르게 나열한 것은? [3점]</div>
     <div class="options">
       <label><input type="radio" name="q2" value="1" /> ① Stranger - ばがのうた - Yellow Dancer - Pop virus - GEN</label>
       <label><input type="radio" name="q2" value="2" /> ② ばがのうた - Yellow Dancer - Stranger – Pop virus - GEN</label>
@@ -285,11 +285,11 @@
     <input type="text" name="q18" placeholder="정답을 입력하세요" />
   </div>
 
-  <!-- 19 -->
-  <div class="question" data-q="19">
-    <div class="q-title" data-num="19."> 호시노겐은 2021년 처음으로 한국아티스트와 듀엣곡을 불렀다. 그 가수의 이름과 노래의 제목은? [3점]</div>
-    <input type="text" name="q19" placeholder="예: 가수, 곡명" />
-  </div>
+<!-- 19 -->
+<div class="question" data-q="19">
+  <div class="q-title" data-num="19."> 호시노겐은 2021년 처음으로 한국아티스트와 듀엣곡을 불렀다.<br>그 가수의 이름과 노래의 제목은? [3점]</div>
+  <div class="q19-inputs"><input type="text" name="q19_artist" placeholder="가수 이름" /><input type="text" name="q19_song" placeholder="곡명" />
+  </div></div>
 
   <!-- 20 -->
   <div class="question" data-q="20">
@@ -366,15 +366,15 @@
   <div class="question" data-q="26">
     <div class="q-title" data-num="26."> 다음 사진은 호시노겐 유튜브 니세아키라 Vol.2 ~녹음 편~이다. 아래 들어갈 대사 중 알맞지 않은 것은? [5점]</div>
     <div class="options">
-      <label><input type="radio" name="q26" value="1" /> ① 니세는 한방승부를 좋아하니까! <img src="q26-1.png" alt="문제 26-1 이미지" style="width:200px; height:auto;" />
+      <label><input type="radio" name="q26" value="1" /> ① 니세는 한방승부를 좋아하니까!<br> <img src="q26-1.png" alt="문제 26-1 이미지" style="width:200px; height:auto;" />
 </label>
-      <label><input type="radio" name="q26" value="2" /> ② 음악에서 뭐가 가장 중요하냐면 역시.. 느낌이네 <img src="q26-2.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
+      <label><input type="radio" name="q26" value="2" /> ② 음악에서 뭐가 가장 중요하냐면 역시.. 느낌이네<br> <img src="q26-2.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
  </label>
-      <label><input type="radio" name="q26" value="3" /> ③ 한방승부를 위해서니까<img src="q26-3.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
+      <label><input type="radio" name="q26" value="3" /> ③ 한방승부를 위해서니까<br><img src="q26-3.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
  </label>
-      <label><input type="radio" name="q26" value="4" /> ④ 역시 나는 음악의 인간이구나 생각했어! <img src="q26-4.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
+      <label><input type="radio" name="q26" value="4" /> ④ 역시 나는 음악의 인간이구나 생각했어! <br><img src="q26-4.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
  </label>
-      <label><input type="radio" name="q26" value="5" /> ⑤ 역시 한방에 끝났어! <img src="q26-5.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
+      <label><input type="radio" name="q26" value="5" /> ⑤ 역시 한방에 끝났어! <br><img src="q26-5.png" alt="문제 26 이미지" style="width:200px; height:auto;" />
 </label>
     </div>
   </div>
@@ -467,7 +467,7 @@
     { contains:"칫솔" }, // Q16 '칫솔' 포함 시 정답
     ["쏘시타라","sositara","そしたら"], // Q17 다중 정답
     "생명의차창에서", // Q18
-    ["자이언티","쟈이언티","ziont","zion.t"], // Q19 다중 정답
+    [ ["자이언티","쟈이언티","ziont","zion.t"], ["nomad","노매드","노마드","노메드"] ], // Q19
     ["아뮤즈","어뮤즈","amuse"], // Q20 다중 정답
     "2", // Q21
     "4", // Q22
@@ -502,6 +502,7 @@ function gradeQuiz() {
   }
 
   // 미응답 검사
+
   const unanswered = [];
   for (let i = 0; i < answerKey.length; i++) {
     const qNum = i + 1;
@@ -516,6 +517,14 @@ function gradeQuiz() {
       const field = document.querySelector(`[name="q${qNum}"]`);
       answered = field && field.value.trim() !== "";
     }
+if (qNum === 19) {
+  const artistField = document.querySelector('[name="q19_artist"]');
+  const songField = document.querySelector('[name="q19_song"]');
+  answered = artistField.value.trim() !== "" && songField.value.trim() !== "";
+} else {
+  const field = document.querySelector(`[name="q${qNum}"]`);
+  answered = field && field.value.trim() !== "";
+}
 
     if (!answered) {
       unanswered.push(qNum);
@@ -531,6 +540,52 @@ function gradeQuiz() {
   let totalAvailable = 0;
   let earned = 0;
   const answers = [];
+for (let i = 0; i < answerKey.length; i++) {
+  const qNum = i + 1;
+  const key = answerKey[i];
+  const pt = Number(points[i] || 0);
+
+  let correct = false;
+  let userVal = "";
+
+  if (qNum === 19) {
+    // Q19: 가수 + 곡명 두 칸 채점
+    const artistVal = document.querySelector('[name="q19_artist"]').value;
+    const songVal = document.querySelector('[name="q19_song"]').value;
+
+    const artistOk = key[0].some(ans => normalize(artistVal) === normalize(ans));
+    const songOk = key[1].some(ans => normalize(songVal) === normalize(ans));
+
+    correct = artistOk && songOk;
+    userVal = `${artistVal} / ${songVal}`;
+  } else {
+    // 기존 객관식/단답형 채점 로직
+    const checked = document.querySelector(`input[name="q${qNum}"]:checked`);
+    if (checked) {
+      userVal = checked.value;
+    } else {
+      const field = document.querySelector(`[name="q${qNum}"]`);
+      userVal = field ? field.value : "";
+    }
+
+    if (/^[1-5]$/.test(key)) {
+      correct = userVal === key;
+    } else if (Array.isArray(key)) {
+      correct = key.some(ans => normalize(userVal) === normalize(ans));
+    } else if (typeof key === "object" && key.base) {
+      const baseNorm = normalize(key.base.replace(/^@/, ""));
+      const userNorm = normalize(userVal.replace(/^@/, ""));
+      correct = userNorm === baseNorm;
+    } else if (typeof key === "object" && key.contains) {
+      correct = normalize(userVal).includes(normalize(key.contains));
+    } else {
+      correct = normalize(userVal) === normalize(key);
+    }
+  }
+
+  if (correct) earned += pt;
+  answers.push({ question: qNum, user: userVal, key, correct, pt });
+}
 
   for (let i = 0; i < answerKey.length; i++) {
     const qNum = i + 1;
@@ -574,6 +629,23 @@ function gradeQuiz() {
     }
 
     const percent = ((earned / totalAvailable) * 100).toFixed(1);
+
+// 점수 구간별 메시지
+let message = "";
+if (earned >= 90) {
+  message = "호시노겐만 파는 당신은 호덕호덕! 멋져요!";
+} else if (earned >= 70) {
+  message = "호시노겐을 사랑하는 우리는 겐모다치!";
+} else if (earned >= 50) {
+  message = "괜찮아요, 조금만 더 공부하면 돼요! 우리 겐상 어렵지 않아요";
+} else {
+  message = "겐상을 이제 알아가는 중?";
+}
+
+// 팝업창 띄우기
+alert(`${nickname} 님 ${earned}점 입니다.\n${message}`);
+
+
     document.getElementById("result").innerHTML = `
       <div class="nick">닉네임: ${nickname}</div>
       <div>획득 점수: ${earned}점 / ${totalAvailable}점 (${percent}%)</div>
