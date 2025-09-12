@@ -186,7 +186,7 @@
   width: 80%;
   max-width: 500px;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
 }
 </style>
 
@@ -673,11 +673,11 @@ document.addEventListener("DOMContentLoaded", function() {
     alert(`${nickname} 님 ${earned}점 입니다.\n${message}`);
 
 // 점수 계산 후
-fetch("https://script.google.com/macros/s/AKfycbzI4Y7M4HFI3IDK53J3ehbDYMK-n3LKvtlITFtpd4oOflXlOz85fnF67ogSirCdfJoi/exec", {
-  method: "POST",
-  mode: "no-cors",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
+fetch("https://script.google.com/macros/s/AKfycbzI4Y7M4HFI3IDK53J3ehbDYMK-n3LKvtlITFtpd4oOflXlOz85fnF67ogSirCdfJoi/exec", 
+{method: "POST",
+ mode: "no-cors",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify({
     nickname: nickname,
     score: earned
   })
