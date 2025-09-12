@@ -628,11 +628,14 @@
 
     alert(`${nickname} 님 ${earned}점 입니다.\n${message}`);
 
-<form method="post" action="https://script.google.com/macros/s/AKfycbwFV__uJvz32VoHtq_2cRrZFyo-6VWNzVItCNsKFmsrhov7AQGW0ZTXBh7MdiSfDos/exec">
-  이름: <input type="text" name="name" required><br><br>
-  답변: <input type="text" name="answer" required><br><br>
-  <button type="submit">제출</button>
-</form>
+fetch("https://script.google.com/macros/s/AKfycbxmS-9QLIlFzu0_tMEVXbDCCJJJePjv07Z7ua9mGIaQR5jLb4hJYG27mqlt2D3MCV-_/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    nickname: nickname, // 사용자가 입력한 닉네임
+    score: earned        // 계산된 점수
+  })
+});
 
     document.getElementById("result").innerHTML = `
       <div class="nick">닉네임: ${nickname}</div>
