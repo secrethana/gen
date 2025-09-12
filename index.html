@@ -29,7 +29,7 @@
 .q-title {
   font-weight: 700;
   margin-bottom: 8px;
-  padding-left: 2.5em;   /* 번호 영역 폭 */
+  padding-left: 1.25em;   /* 번호 영역 폭 */
   position: relative;
 }
 .q-title::before {
@@ -44,7 +44,7 @@
   display: block;
   margin: 6px 0;
   font-weight: 500;
-  padding-left: 2.5em;    /* 번호 영역 폭 */
+  padding-left: 0.5em;    /* 번호 영역 폭 */
   position: relative;
 }
 .options label::before {
@@ -100,32 +100,93 @@
     color: #6b7280;
     font-size: 0.92em;
   }
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  text-align: left;
+}
+.modal-content h2 {
+  margin-top: 0;
+}
+#closeNotice {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 보기 정렬 개선 */
+.options label {
+  display: flex;
+  align-items: flex-start;
+  margin: 6px 0;
+  font-weight: 500;
+  gap: 0.5em;
+}
+.options input[type="radio"] {
+  margin-right: 0.3em;
+  margin-top: 3px;
+}
+.options .opt-num {
+  min-width: 1em;
+  font-weight: bold;
+}
+.options .opt-text {
+  flex: 1;
+}
 </style>
+
+<div id="noticeModal" class="modal">
+  <div class="modal-content">
+    <h2>📝 주의사항</h2>
+    <ul>
+      <li>웃자고 만든 시험지입니다. 죽자고 달려들지 말아주세요.</li>
+      <li>컨닝, 인터넷 검색, 호시노겐에게 직접 질문하기 등을 <strong>엄격하게 권장</strong>합니다.</li>
+      <li>문제에 이의가 있을 시 <strong>출제자 말이 다 틀리고 응시자 말이 다 맞는 것으로 간주</strong>합니다.</li>
+      <li>답안지의 해당란에 필요한 내용을 정확히 기입했는지 확인하세요.</li>
+      <li>문제를 풀고 채점하신 후 꼭 굿즈를 받아 가세요.</li>
+      <li>호시노겐은 사랑♡입니다. 모두 즐거운 공연 관람 되세요.</li>
+    </ul>
+    <button id="closeNotice">시험 시작하기</button>
+  </div>
+</div>
+
 </head>
 <body>
 
 <h1>📘 2025년 9월 13~14일 호시노겐 내한기념 문제지</h1>
 
-<div class="notice">
-  <h2>📝 주의사항</h2>
-  <ul>
-    <li>웃자고 만든 시험지입니다. 죽자고 달려들지 말아주세요.</li>
-    <li>컨닝, 인터넷 검색, 호시노겐에게 직접 질문하기 등을 <strong>엄격하게 권장</strong>합니다.</li>
-    <li>문제에 이의가 있을 시 <strong>출제자 말이 다 틀리고 응시자 말이 다 맞는 것으로 간주</strong>합니다.</li>
-    <li>답안지의 해당란에 필요한 내용을 정확히 기입했는지 확인하세요.</li>
-    <li>문제를 풀고 채점하신 후 꼭 굿즈를 받아 가세요.</li>
-    <li>호시노겐은 사랑♡입니다. 모두 즐거운 공연 관람 되세요.</li>
-  </ul>
 
-  <!-- 1 -->
+      <!-- 1 -->
   <div class="question" data-q="1">
     <div class="q-title" data-num="1."> 호시노겐이 솔로 아티스트 데뷔 이전 속해있었던 밴드의 이름으로 알맞은 것은? [3점]</div>
-    <div class="options">
-      <label><input type="radio" name="q1" value="1" /> ① SAWAROCK</label>
-      <label><input type="radio" name="q1" value="2" /> ② BEERROCK</label>
-      <label><input type="radio" name="q1" value="3" /> ③ SAKEROCK</label>
-      <label><input type="radio" name="q1" value="4" /> ④ SAVEROCK</label>
-      <label><input type="radio" name="q1" value="5" /> ⑤ SAJAROCK</label>
+<div class="options">
+      <label><input type="radio" name="q1" value="1"><span class="opt-num">①</span><span class="opt-text">SAWAROCK</span></label>
+      <label><input type="radio" name="q1" value="2"><span class="opt-num">②</span><span class="opt-text">BEERROCK</span></label>
+      <label><input type="radio" name="q1" value="3"><span class="opt-num">③</span><span class="opt-text">SAKEROCK</span></label>
+      <label><input type="radio" name="q1" value="4"><span class="opt-num">④</span><span class="opt-text">SAVEROCK</span></label>
+      <label><input type="radio" name="q1" value="5"><span class="opt-num">⑤</span><span class="opt-text">SAJAROCK</span></label>
     </div>
   </div>
 
@@ -133,11 +194,11 @@
   <div class="question" data-q="2">
     <div class="q-title" data-num="2."> 호시노겐의 앨범을 발매년도 순서대로 바르게 나열한 것은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q2" value="1" /> ① Stranger - ばがのうた - Yellow Dancer - Pop virus - GEN</label>
-      <label><input type="radio" name="q2" value="2" /> ② ばがのうた - Yellow Dancer - Stranger – Pop virus - GEN</label>
-      <label><input type="radio" name="q2" value="3" /> ③ Yellow Dancer - Stranger – Pop virus – GEN - ばがのうた</label>
-      <label><input type="radio" name="q2" value="4" /> ④ ばがのうた - Stranger – Yellow Dancer – Pop virus - GEN</label>
-      <label><input type="radio" name="q2" value="5" /> ⑤ Stranger – Pop virus – GEN - ばがのうた - Yellow Dancer</label>
+      <label><input type="radio" name="q2" value="1"><span class="opt-num">①</span><span class="opt-text">Stranger - ばがのうた - Yellow Dancer - Pop virus - GEN</span></label>
+      <label><input type="radio" name="q2" value="2"><span class="opt-num">②</span><span class="opt-text">ばがのうた - Yellow Dancer - Stranger – Pop virus - GEN</span></label>
+      <label><input type="radio" name="q2" value="3"><span class="opt-num">③</span><span class="opt-text">Yellow Dancer - Stranger – Pop virus – GEN - ばがのうた</span></label>
+      <label><input type="radio" name="q2" value="4"><span class="opt-num">④</span><span class="opt-text">ばがのうた - Stranger – Yellow Dancer – Pop virus - GEN</span></label>
+      <label><input type="radio" name="q2" value="5"><span class="opt-num">⑤</span><span class="opt-text">Stranger – Pop virus – GEN - ばがのうた - Yellow Dancer</span></label>
     </div>
   </div>
 
@@ -145,11 +206,11 @@
   <div class="question" data-q="3">
     <div class="q-title" data-num="3."> 호시노겐의 「POP VIRUS」가 수록된 게임의 제목은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q3" value="1" /> ① Death Stranding</label>
-      <label><input type="radio" name="q3" value="2" /> ② Final Fantasy</label>
-      <label><input type="radio" name="q3" value="3" /> ③ Super Mario</label>
-      <label><input type="radio" name="q3" value="4" /> ④ The Legend of Zelda</label>
-      <label><input type="radio" name="q3" value="5" /> ⑤ Persona 5</label>
+      <label><input type="radio" name="q3" value="1"><span class="opt-num">①</span><span class="opt-text">Death Stranding</span></label>
+      <label><input type="radio" name="q3" value="2"><span class="opt-num">②</span><span class="opt-text">Final Fantasy</span></label>
+      <label><input type="radio" name="q3" value="3"><span class="opt-num">③</span><span class="opt-text">Super Mario</span></label>
+      <label><input type="radio" name="q3" value="4"><span class="opt-num">④</span><span class="opt-text">The Legend of Zelda</span></label>
+      <label><input type="radio" name="q3" value="5"><span class="opt-num">⑤</span><span class="opt-text">Persona 5</span></label>
     </div>
   </div>
 
@@ -157,11 +218,11 @@
   <div class="question" data-q="4">
     <div class="q-title" data-num="4.">다음 캐릭터중 호시노겐의 부캐와 그 설명이 바르게 짝지어지지 않은 것은? [5점]</div>
     <div class="options">
-      <label><input type="radio" name="q4" value="1" /> ① 니세아키라 – 첫 번째 싱글 제목은 FAKE이다.</label>
-      <label><input type="radio" name="q4" value="2" /> ② 오모에몽 – 과하다는 뜻 + 도라에몽의 합성어이다.</label>
-      <label><input type="radio" name="q4" value="3" /> ③ 우소타로 – 입만 열면 자동으로 거짓말이 나오는 캐릭터이다.</label>
-      <label><input type="radio" name="q4" value="4" /> ④ 오겐상 – 도쿄 시부야의 가정주부로, 성별은 여성이다.</label>
-      <label><input type="radio" name="q4" value="5" /> ⑤ 니세아키라 – 라디오에서 인생상담 코너를 진행한다.</label>
+      <label><input type="radio" name="q4" value="1"><span class="opt-num">①</span><span class="opt-text">니세아키라 – 첫 번째 싱글 제목은 FAKE이다.</span></label>
+      <label><input type="radio" name="q4" value="2"><span class="opt-num">②</span><span class="opt-text">오모에몽 – 과하다는 뜻 + 도라에몽의 합성어이다.</span></label>
+      <label><input type="radio" name="q4" value="3"><span class="opt-num">③</span><span class="opt-text">우소타로 – 입만 열면 자동으로 거짓말이 나오는 캐릭터이다.</span></label>
+      <label><input type="radio" name="q4" value="4"><span class="opt-num">④</span><span class="opt-text">오겐상 – 도쿄 시부야의 가정주부로, 성별은 여성이다.</span></label>
+      <label><input type="radio" name="q4" value="5"><span class="opt-num">⑤</span><span class="opt-text">니세아키라 – 라디오에서 인생상담 코너를 진행한다.</span></label>
     </div>
   </div>
 
@@ -169,11 +230,11 @@
   <div class="question" data-q="5">
     <div class="q-title" data-num="5."> 다음 중 호시노겐에 대한 설명으로 옳지 않은 것은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q5" value="1" /> ① 그는 초동안이지만 40대이다.</label>
-      <label><input type="radio" name="q5" value="2" /> ② 그가 아무리 키가 작아 보여도 170cm을 넘는다.</label>
-      <label><input type="radio" name="q5" value="3" /> ③ 그의 트레이드마크인 점은 오른쪽에 있다.</label>
-      <label><input type="radio" name="q5" value="4" /> ④ 호시노겐이라는 이름은 본명이다.</label>
-      <label><input type="radio" name="q5" value="5" /> ⑤ 그는 사이타마현 출신이다.</label>
+      <label><input type="radio" name="q5" value="1"><span class="opt-num">①</span><span class="opt-text">그는 초동안이지만 40대이다.</span></label>
+      <label><input type="radio" name="q5" value="2"><span class="opt-num">②</span><span class="opt-text">그가 아무리 키가 작아 보여도 170cm을 넘는다.</span></label>
+      <label><input type="radio" name="q5" value="3"><span class="opt-num">③</span><span class="opt-text">그의 트레이드마크인 점은 오른쪽에 있다.</span></label>
+      <label><input type="radio" name="q5" value="4"><span class="opt-num">④</span><span class="opt-text">호시노겐이라는 이름은 본명이다.</span></label>
+      <label><input type="radio" name="q5" value="5"><span class="opt-num">⑤</span><span class="opt-text">그는 사이타마현 출신이다.</span></label>
     </div>
   </div>
 
@@ -181,11 +242,11 @@
   <div class="question" data-q="6">
     <div class="q-title" data-num="6."> 넷플릭스 토크쇼 Lighthouse에서 호시노겐과 공동 진행자의 이름으로 알맞은 것은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q6" value="1" /> ① 히무라 유우키</label>
-      <label><input type="radio" name="q6" value="2" /> ② 마츠시게 유타카</label>
-      <label><input type="radio" name="q6" value="3" /> ③ 와카바야시 마사야스</label>
-      <label><input type="radio" name="q6" value="4" /> ④ 이영지</label>
-      <label><input type="radio" name="q6" value="5" /> ⑤ 호소노 하루오미</label>
+      <label><input type="radio" name="q6" value="1"><span class="opt-num">①</span><span class="opt-text">히무라 유우키</span></label>
+      <label><input type="radio" name="q6" value="2"><span class="opt-num">②</span><span class="opt-text">마츠시게 유타카</span></label>
+      <label><input type="radio" name="q6" value="3"><span class="opt-num">③</span><span class="opt-text">와카바야시 마사야스</span></label>
+      <label><input type="radio" name="q6" value="4"><span class="opt-num">④</span><span class="opt-text">이영지</span></label>
+      <label><input type="radio" name="q6" value="5"><span class="opt-num">⑤</span><span class="opt-text">호소노 하루오미</span></label>
     </div>
   </div>
 
@@ -193,11 +254,11 @@
   <div class="question" data-q="7">
     <div class="q-title" data-num="7."> STAR에는 총 4번의 しをてに가 나온다. 다음 보기 중 STAR에 들어가지 않은 しをてには 무엇인가? [5점]</div>
     <div class="options">
-      <label><input type="radio" name="q7" value="1" /> ① 始を手に(시작을 손에)</label>
-      <label><input type="radio" name="q7" value="2" /> ② 詩を手に(시를 손에)</label>
-      <label><input type="radio" name="q7" value="3" /> ③ 志を手に(뜻을 손에)</label>
-      <label><input type="radio" name="q7" value="4" /> ④ 私を手に(나를 손에)</label>
-      <label><input type="radio" name="q7" value="5" /> ⑤ 死を手に(죽음을 손에)</label>
+      <label><input type="radio" name="q7" value="1"><span class="opt-num">①</span><span class="opt-text">始を手に(시작을 손에)</span></label>
+      <label><input type="radio" name="q7" value="2"><span class="opt-num">②</span><span class="opt-text">詩を手に(시를 손에)</span></label>
+      <label><input type="radio" name="q7" value="3"><span class="opt-num">③</span><span class="opt-text">志を手に(뜻을 손에)</span></label>
+      <label><input type="radio" name="q7" value="4"><span class="opt-num">④</span><span class="opt-text">私を手に(나를 손에)</span></label>
+      <label><input type="radio" name="q7" value="5"><span class="opt-num">⑤</span><span class="opt-text">死を手に(죽음을 손에)</span></label>
     </div>
   </div>
 
@@ -205,11 +266,11 @@
   <div class="question" data-q="8">
     <div class="q-title" data-num="8."> 호시노겐은 2024년 제75회 홍백가합전에 출연할 당시 음악 선곡이 地獄でなぜ悪い에서 ○○○○으로 바뀌는 사건을 겪었다. ○○○○에 들어갈 곡으로 알맞은 것은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q8" value="1" /> ① ひらめき(히라메키)</label>
-      <label><input type="radio" name="q8" value="2" /> ② ばらばら(바라바라)</label>
-      <label><input type="radio" name="q8" value="3" /> ③ アイデア(아이디어)</label>
-      <label><input type="radio" name="q8" value="4" /> ④ エピソード(에피소드)</label>
-      <label><input type="radio" name="q8" value="5" /> ⑤ ただいま(타다이마)</label>
+      <label><input type="radio" name="q8" value="1"><span class="opt-num">①</span><span class="opt-text">ひらめき(히라메키)</span></label>
+      <label><input type="radio" name="q8" value="2"><span class="opt-num">②</span><span class="opt-text">ばらばら(바라바라)</span></label>
+      <label><input type="radio" name="q8" value="3"><span class="opt-num">③</span><span class="opt-text">アイデア(아이디어)</span></label>
+      <label><input type="radio" name="q8" value="4"><span class="opt-num">④</span><span class="opt-text">エピソード(에피소드)</span></label>
+      <label><input type="radio" name="q8" value="5"><span class="opt-num">⑤</span><span class="opt-text">ただいま(타다이마)</span></label>
     </div>
   </div>
 
@@ -217,11 +278,11 @@
   <div class="question" data-q="9">
     <div class="q-title" data-num="9."> 호시노겐이 うちで踊ろう를 작사·작곡하게 된 계기가 된 당시의 일본 시대 상황으로 알맞은 것은? [3점]</div>
     <div class="options">
-      <label><input type="radio" name="q9" value="1" /> ① 코로나 19 팬데믹</label>
-      <label><input type="radio" name="q9" value="2" /> ② 동일본 대지진</label>
-      <label><input type="radio" name="q9" value="3" /> ③ 레이와 시대의 시작</label>
-      <label><input type="radio" name="q9" value="4" /> ④ 포켓몬 GO 열풍</label>
-      <label><input type="radio" name="q9" value="5" /> ⑤ 도쿄올림픽</label>
+      <label><input type="radio" name="q9" value="1"><span class="opt-num">①</span><span class="opt-text">코로나 19 팬데믹</span></label>
+      <label><input type="radio" name="q9" value="2"><span class="opt-num">②</span><span class="opt-text">동일본 대지진</span></label>
+      <label><input type="radio" name="q9" value="3"><span class="opt-num">③</span><span class="opt-text">레이와 시대의 시작</span></label>
+      <label><input type="radio" name="q9" value="4"><span class="opt-num">④</span><span class="opt-text">포켓몬 GO 열풍</span></label>
+      <label><input type="radio" name="q9" value="5"><span class="opt-num">⑤</span><span class="opt-text">도쿄올림픽</span></label>
     </div>
   </div>
 
@@ -229,11 +290,11 @@
   <div class="question" data-q="10">
     <div class="q-title" data-num="10."> 호시노겐의 출연작과 그 설명이 잘못 짝지어진 것은? [5점]</div>
     <div class="options">
-      <label><input type="radio" name="q10" value="1" /> ① 라이트하우스 – 1줄 일기를 바탕으로 한 토크쇼야.</label>
-      <label><input type="radio" name="q10" value="2" /> ② 코우노도리 – 시즌1과 시즌2가 방영되었어.</label>
-      <label><input type="radio" name="q10" value="3" /> ③ 오겐상과 함께 – 2025년 3월 27일에 막을 내렸어.</label>
-      <label><input type="radio" name="q10" value="4" /> ④ 플라쥬 – 호시노겐이 마약 전과자 역할로 나왔어.</label>
-      <label><input type="radio" name="q10" value="5" /> ⑤ 여학교의 별 – 호시노겐은 학생 역할의 성우를 맡았어.</label>
+      <label><input type="radio" name="q10" value="1"><span class="opt-num">①</span><span class="opt-text">라이트하우스 – 1줄 일기를 바탕으로 한 토크쇼야.</span></label>
+      <label><input type="radio" name="q10" value="2"><span class="opt-num">②</span><span class="opt-text">코우노도리 – 시즌1과 시즌2가 방영되었어.</span></label>
+      <label><input type="radio" name="q10" value="3"><span class="opt-num">③</span><span class="opt-text">오겐상과 함께 – 2025년 3월 27일에 막을 내렸어.</span></label>
+      <label><input type="radio" name="q10" value="4"><span class="opt-num">④</span><span class="opt-text">플라쥬 – 호시노겐이 마약 전과자 역할로 나왔어.</span></label>
+      <label><input type="radio" name="q10" value="5"><span class="opt-num">⑤</span><span class="opt-text">여학교의 별 – 호시노겐은 학생 역할의 성우를 맡았어.</span></label>
     </div>
   </div>
 
@@ -302,11 +363,11 @@
     <div class="q-title" data-num="21."> 아래 사진은 2020년 방영된 호시노겐 주연 드라마 「MIU404」의 한 장면이다. 이 장면에 대하여 바르게 설명한 사람은? [3점]</div>
     <img src="q21.png" alt="문제 21 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q21" value="1" /> ① 메밀소바 – 저 둘은 사귀는 사이야!</label>
-      <label><input type="radio" name="q21" value="2" /> ② 유레카 – 대장이 들고 있는 액자는 사별한 남편의 사진이야!</label>
-      <label><input type="radio" name="q21" value="3" /> ③ 제제 – 시마는 대장에게 사죄하고 있어!</label>
-      <label><input type="radio" name="q21" value="4" /> ④ 호두 – 이곳은 시바우라 분주소야!</label>
-      <label><input type="radio" name="q21" value="5" /> ⑤ iamNiseGen – 시마는 지금 하얀바지를 입고있어!</label>
+      <label><input type="radio" name="q21" value="1"><span class="opt-num">①</span><span class="opt-text">메밀소바 – 저 둘은 사귀는 사이야!</span></label>
+      <label><input type="radio" name="q21" value="2"><span class="opt-num">②</span><span class="opt-text">유레카 – 대장이 들고 있는 액자는 사별한 남편의 사진이야!</span></label>
+      <label><input type="radio" name="q21" value="3"><span class="opt-num">③</span><span class="opt-text">제제 – 시마는 대장에게 사죄하고 있어!</span></label>
+      <label><input type="radio" name="q21" value="4"><span class="opt-num">④</span><span class="opt-text">호두 – 이곳은 시바우라 분주소야!</span></label>
+      <label><input type="radio" name="q21" value="5"><span class="opt-num">⑤</span><span class="opt-text">iamNiseGen – 시마는 지금 하얀바지를 입고있어!</span></label>
     </div>
   </div>
 
@@ -315,11 +376,11 @@
     <div class="q-title" data-num="22."> 아래 사진은 2020년 방영된 호시노겐 주연 드라마 「MIU404」의 한 장면이다. 이 장면에 대하여 잘못 설명한 사람은? [3점]</div>
     <img src="q22.png" alt="문제 22 이미지"style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q22" value="1" /> ① 호시노겐☆ – 시마는 코사카와의 과거를 회상하고 있어.</label>
-      <label><input type="radio" name="q22" value="2" /> ② cutegen – 한시간당 2천엔 위스키 세트를 주문했어.</label>
-      <label><input type="radio" name="q22" value="3" /> ③ 겐상내한♡ - 이곳에 온 이유는 마이에게 전화가 왔기 때문이야</label>
-      <label><input type="radio" name="q22" value="4" /> ④ 멜론빵 – 시마는 위스키를 너무 많이 마셔서 술에 취했어.</label>
-      <label><input type="radio" name="q22" value="5" /> ⑤ 호쿠호쿠 – 시마는 이부키, 마이와 함께 앉아 있어.</label>
+      <label><input type="radio" name="q22" value="1"><span class="opt-num">①</span><span class="opt-text">호시노겐☆ – 시마는 코사카와의 과거를 회상하고 있어.</span></label>
+      <label><input type="radio" name="q22" value="2"><span class="opt-num">②</span><span class="opt-text">cutegen – 한시간당 2천엔 위스키 세트를 주문했어.</span></label>
+      <label><input type="radio" name="q22" value="3"><span class="opt-num">③</span><span class="opt-text">겐상내한♡ - 이곳에 온 이유는 마이에게 전화가 왔기 때문이야</span></label>
+      <label><input type="radio" name="q22" value="4"><span class="opt-num">④</span><span class="opt-text">멜론빵 – 시마는 위스키를 너무 많이 마셔서 술에 취했어.</span></label>
+      <label><input type="radio" name="q22" value="5"><span class="opt-num">⑤</span><span class="opt-text">호쿠호쿠 – 시마는 이부키, 마이와 함께 앉아 있어.</span></label>
     </div>
   </div>
 
@@ -328,11 +389,11 @@
     <div class="q-title" data-num="23."> 아래 사진은 2016년 방영된 호시노겐 주연 드라마 「도망치는건 부끄럽지만 도움이 된다」의 한 장면이다. 이 장면에 대하여 잘못 설명한 사람은? [3점]</div>
     <img src="q23.png" alt="문제 23 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q23" value="1" /> ① weekend – 미쿠리는 히라마사가 거짓말을 했다고 생각해.</label>
-      <label><input type="radio" name="q23" value="2" /> ② 동 – 히라마사는 술을 많이 먹어서 속이 안 좋은 상태야.</label>
-      <label><input type="radio" name="q23" value="3" /> ③ chan1224 – 이곳은 히라마사와 미쿠리의 집이야.</label>
-      <label><input type="radio" name="q23" value="4" /> ④ WE – 히라마사는 미쿠리에게 줄 소바를 사왔어.</label>
-      <label><input type="radio" name="q23" value="5" /> ⑤ 미 – 미쿠리는 히라마사가 오기전에 바보!라고 소리쳤어.</label>
+      <label><input type="radio" name="q23" value="1"><span class="opt-num">①</span><span class="opt-text">weekend – 미쿠리는 히라마사가 거짓말을 했다고 생각해.</span></label>
+      <label><input type="radio" name="q23" value="2"><span class="opt-num">②</span><span class="opt-text">동 – 히라마사는 술을 많이 먹어서 속이 안 좋은 상태야.</span></label>
+      <label><input type="radio" name="q23" value="3"><span class="opt-num">③</span><span class="opt-text">chan1224 – 이곳은 히라마사와 미쿠리의 집이야.</span></label>
+      <label><input type="radio" name="q23" value="4"><span class="opt-num">④</span><span class="opt-text">WE – 히라마사는 미쿠리에게 줄 소바를 사왔어.</span></label>
+      <label><input type="radio" name="q23" value="5"><span class="opt-num">⑤</span><span class="opt-text">미 – 미쿠리는 히라마사가 오기전에 바보!라고 소리쳤어.</span></label>
     </div>
   </div>
 
@@ -341,11 +402,11 @@
     <div class="q-title" data-num="24."> 아래 사진은 2016년 방영된 호시노겐 주연 드라마 「도망치는건 부끄럽지만 도움이 된다」의 한 장면이다. 이 장면에 대하여 바르게 설명한 사람은? [3점]</div>
     <img src="q24.png" alt="문제 24 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q24" value="1" /> ① 源 – 덤블링하는 모습으로 매력을 어필하고 있어.</label>
-      <label><input type="radio" name="q24" value="2" /> ② happy virus – 둘은 잡기놀이를 하고있어.</label>
-      <label><input type="radio" name="q24" value="3" /> ③ 니세아키라 – 바닥에는 히라마사의 속옷이 떨어져있어.</label>
-      <label><input type="radio" name="q24" value="4" /> ④ ‘-’ – 히라마사는 미쿠리가 같이 목욕하자고 해서 당황했어.</label>
-      <label><input type="radio" name="q24" value="5" /> ⑤ 카페모카 – 히라마사의 집에서 일어난 일이야.</label>
+      <label><input type="radio" name="q24" value="1"><span class="opt-num">①</span><span class="opt-text">源 – 덤블링하는 모습으로 매력을 어필하고 있어.</span></label>
+      <label><input type="radio" name="q24" value="2"><span class="opt-num">②</span><span class="opt-text">happy virus – 둘은 잡기놀이를 하고있어.</span></label>
+      <label><input type="radio" name="q24" value="3"><span class="opt-num">③</span><span class="opt-text">니세아키라 – 바닥에는 히라마사의 속옷이 떨어져있어.</span></label>
+      <label><input type="radio" name="q24" value="4"><span class="opt-num">④</span><span class="opt-text">‘-’ – 히라마사는 미쿠리가 같이 목욕하자고 해서 당황했어.</span></label>
+      <label><input type="radio" name="q24" value="5"><span class="opt-num">⑤</span><span class="opt-text">카페모카 – 히라마사의 집에서 일어난 일이야.</span></label>
     </div>
   </div>
 
@@ -354,11 +415,11 @@
     <div class="q-title" data-num="25."> 아래 사진은 2016년 방영된 호시노겐 주연 드라마 「코우노도리」의 한 장면이다. 누워있는 아이의 이름으로 알맞은 것은? [3점]</div>
     <img src="q25.png" alt="문제 25 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q25" value="1" /> ① 츠쿠시</label>
-      <label><input type="radio" name="q25" value="2" /> ② 츠바사</label>
-      <label><input type="radio" name="q25" value="3" /> ③ 츠보미</label>
-      <label><input type="radio" name="q25" value="4" /> ④ 츠자키</label>
-      <label><input type="radio" name="q25" value="5" /> ⑤ 츠카사</label>
+      <label><input type="radio" name="q25" value="1"><span class="opt-num">①</span><span class="opt-text">츠쿠시</span></label>
+      <label><input type="radio" name="q25" value="2"><span class="opt-num">②</span><span class="opt-text">츠바사</span></label>
+      <label><input type="radio" name="q25" value="3"><span class="opt-num">③</span><span class="opt-text">츠보미</span></label>
+      <label><input type="radio" name="q25" value="4"><span class="opt-num">④</span><span class="opt-text">츠자키</span></label>
+      <label><input type="radio" name="q25" value="5"><span class="opt-num">⑤</span><span class="opt-text">츠카사</span></label>
     </div>
   </div>
 
@@ -384,11 +445,11 @@
     <div class="q-title" data-num="27."> 다음 그림은 호시노겐의 스타디움 투어 「Pop Virus」의 한 장면이다. 이 퍼포먼스가 등장한 노래로 알맞은 것은? [3점]</div>
     <img src="q27.png" alt="문제 27 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q27" value="1" /> ① SUN</label>
-      <label><input type="radio" name="q27" value="2" /> ② ドラえもん(도라에몽)</label>
-      <label><input type="radio" name="q27" value="3" /> ③ 君は薔薇より美しい(그대는 장미보다 아름다워)</label>
-      <label><input type="radio" name="q27" value="4" /> ④ アイデア(아이디어)</label>
-      <label><input type="radio" name="q27" value="5" /> ⑤ Hello song</label>
+      <label><input type="radio" name="q27" value="1"><span class="opt-num">①</span><span class="opt-text">SUN</span></label>
+      <label><input type="radio" name="q27" value="2"><span class="opt-num">②</span><span class="opt-text">ドラえもん(도라에몽)</span></label>
+      <label><input type="radio" name="q27" value="3"><span class="opt-num">③</span><span class="opt-text">君は薔薇より美しい(그대는 장미보다 아름다워)</span></label>
+      <label><input type="radio" name="q27" value="4"><span class="opt-num">④</span><span class="opt-text">アイデア(아이디어)</span></label>
+      <label><input type="radio" name="q27" value="5"><span class="opt-num">⑤</span><span class="opt-text">Hello song</span></label>
     </div>
   </div>
 
@@ -397,11 +458,11 @@
     <div class="q-title" data-num="28."> 다음 그림은 호시노겐 뮤직비디오의 한 장면이다. 이 장면이 등장한 뮤직비디오로 알맞은 것은? [3점]</div>
     <img src="q28.png" alt="문제 28 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q28" value="1" /> ① 喜劇(희극)</label>
-      <label><input type="radio" name="q28" value="2" /> ② 折り合い(타협)</label>
-      <label><input type="radio" name="q28" value="3" /> ③ 夢の外へ(꿈밖으로)</label>
-      <label><input type="radio" name="q28" value="4" /> ④ ギャグ(개그)</label>
-      <label><input type="radio" name="q28" value="5" /> ⑤ 桜の森(벚꽃숲)</label>
+      <label><input type="radio" name="q28" value="1"><span class="opt-num">①</span><span class="opt-text">喜劇(희극)</span></label>
+      <label><input type="radio" name="q28" value="2"><span class="opt-num">②</span><span class="opt-text">折り合い(타협)</span></label>
+      <label><input type="radio" name="q28" value="3"><span class="opt-num">③</span><span class="opt-text">夢の外へ(꿈밖으로)</span></label>
+      <label><input type="radio" name="q28" value="4"><span class="opt-num">④</span><span class="opt-text">ギャグ(개그)</span></label>
+      <label><input type="radio" name="q28" value="5"><span class="opt-num">⑤</span><span class="opt-text">桜の森(벚꽃숲)</span></label>
     </div>
   </div>
 
@@ -410,11 +471,11 @@
     <div class="q-title" data-num="29."> 다음 그림은 호시노겐의 2019년에 발표된 디지털EP 자켓사진이다. 음반에 수록되지 않은 곡은? [3점]</div>
     <img src="q29.png" alt="문제 29 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q29" value="1" /> ① Same Thing (feat. Superorganism)</label>
-      <label><input type="radio" name="q29" value="2" /> ② さらしもの (feat. PUNPEE)</label>
-      <label><input type="radio" name="q29" value="3" /> ③ 2(feat. Lee Youngji)</label>
-      <label><input type="radio" name="q29" value="4" /> ④ Ain’t Nobody Know</label>
-      <label><input type="radio" name="q29" value="5" /> ⑤ 私</label>
+      <label><input type="radio" name="q29" value="1"><span class="opt-num">①</span><span class="opt-text">Same Thing (feat. Superorganism)</span></label>
+      <label><input type="radio" name="q29" value="2"><span class="opt-num">②</span><span class="opt-text">さらしもの (feat. PUNPEE)</span></label>
+      <label><input type="radio" name="q29" value="3"><span class="opt-num">③</span><span class="opt-text">2(feat. Lee Youngji)</span></label>
+      <label><input type="radio" name="q29" value="4"><span class="opt-num">④</span><span class="opt-text">Ain’t Nobody Know</span></label>
+      <label><input type="radio" name="q29" value="5"><span class="opt-num">⑤</span><span class="opt-text">私</span></label>
     </div>
   </div>
 
@@ -423,11 +484,11 @@
     <div class="q-title" data-num="30."> 다음 그림은 호시노겐이 나온 CM의 한 장면이다. 어떤 CM인지 바르게 말한 사람은? [3점]</div>
     <img src="q30.png" alt="문제 30 이미지" style="width:300px; height:auto;" />
     <div class="options">
-      <label><input type="radio" name="q30" value="1" /> ① 겐♡ - 우산</label>
-      <label><input type="radio" name="q30" value="2" /> ② IDEA - 안경</label>
-      <label><input type="radio" name="q30" value="3" /> ③ 미 - 우동</label>
-      <label><input type="radio" name="q30" value="4" /> ④ 쏘쏘 - 맥주</label>
-      <label><input type="radio" name="q30" value="5" /> ⑤ 도라에몽겐 - 여우</label>
+      <label><input type="radio" name="q30" value="1"><span class="opt-num">①</span><span class="opt-text">겐♡ - 우산</span></label>
+      <label><input type="radio" name="q30" value="2"><span class="opt-num">②</span><span class="opt-text">IDEA - 안경</span></label>
+      <label><input type="radio" name="q30" value="3"><span class="opt-num">③</span><span class="opt-text">미 - 우동</span></label>
+      <label><input type="radio" name="q30" value="4"><span class="opt-num">④</span><span class="opt-text">쏘쏘 - 맥주</span></label>
+      <label><input type="radio" name="q30" value="5"><span class="opt-num">⑤</span><span class="opt-text">도라에몽겐 - 여우</span></label>
     </div>
   </div>
 </div>
@@ -584,6 +645,15 @@ fetch("https://script.google.com/macros/s/AKfycbxmS-9QLIlFzu0_tMEVXbDCCJJJePjv07
       </div>
     `;
   }
+
+  // 모달 동작
+  window.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("noticeModal");
+    const closeBtn = document.getElementById("closeNotice");
+    modal.style.display = "flex";
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+  });
 </script>
+
 </body>
 </html>
